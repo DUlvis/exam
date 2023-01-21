@@ -1,7 +1,15 @@
-type Props = {}
+type Props = {
+    cartData: {
+        totalPrice: number
+    }
+}
 
-const TotalPrice = (props: Props) => {
-    return <div>TotalPrice</div>
+const TotalPrice = ({ cartData }: Props) => {
+    return (
+        <div>
+            <div>Total:{cartData.totalPrice}</div>
+        </div>
+    )
 }
 
 export default TotalPrice

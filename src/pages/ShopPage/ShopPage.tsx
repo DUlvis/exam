@@ -1,8 +1,14 @@
 import { Typography } from '@mui/material'
 import ProductsList from 'components/Products/ProductsList'
-type Props = {}
+import TotalPrice from 'components/TotalPrice/TotalPrice'
+import Currency from 'components/Сurrency/Currency'
+type Props = {
+    cartData: {
+        totalPrice: number
+    }
+}
 
-const ShopPage = (props: Props) => {
+const ShopPage = ({ cartData }: Props) => {
     return (
         <>
             <Typography
@@ -13,7 +19,9 @@ const ShopPage = (props: Props) => {
             >
                 Our shop page
             </Typography>
+            <Currency />
             <ProductsList />
+            <TotalPrice cartData={cartData} />
         </>
     )
 }
