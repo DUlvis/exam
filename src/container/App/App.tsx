@@ -12,13 +12,23 @@ type CartData = {
 
 const App = (props: Props) => {
     const [cartData, setCartData] = useState<CartData>({
-        totalPrice: 100,
+        totalPrice: 0,
     })
+
+    const addProductToCart = (price: number) => {
+        setCartData((prevState: CartData) => ({
+            totalPrice: prevState.totalPrice + price,
+        }))
+    }
+
     return (
         <>
             <CssBaseline />
             <Container>
-                <ShopPage cartData={cartData} />
+                <ShopPage
+                    cartData={cartData}
+                    addProductToCart={addProductToCart}
+                />
             </Container>
         </>
     )
