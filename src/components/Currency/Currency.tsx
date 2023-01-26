@@ -1,12 +1,15 @@
 import './Currency.scss'
 
-type Props = {}
+type Props = {
+    changeCurrency: (id: number) => void
+}
 
 type CurrencyProps = {
     id: number
     name: string
     coefficient: number
 }
+
 export const currencyObject: CurrencyProps[] = [
     {
         id: 1,
@@ -29,13 +32,14 @@ export const currencyObject: CurrencyProps[] = [
         coefficient: 4.71,
     },
 ]
-const Currency = (props: Props) => {
+const Currency = ({ changeCurrency }: Props) => {
     return (
         <div className="currency">
-            <button>{currencyObject[0].name}</button>
-            <button>{currencyObject[1].name}</button>
-            <button>{currencyObject[2].name}</button>
-            <button>{currencyObject[3].name}</button>
+            {currencyObject.map(({ id, name, coefficient }: CurrencyProps) => (
+                <button key={id} onClick={() => changeCurrency(id - 1)}>
+                    {name}
+                </button>
+            ))}
         </div>
     )
 }

@@ -1,14 +1,38 @@
 import { Typography } from '@mui/material'
+import Currency from 'components/Currency/Currency'
 import ProductsList from 'components/Products/ProductsList'
 import TotalPrice from 'components/TotalPrice/TotalPrice'
-import Currency from 'components/Currency/Currency'
-type Props = {
-    cartData: {
-        totalPrice: number
-    }
-    addProductToCart: (price: number) => void
+import { useState } from 'react'
+import { currencyObject } from 'components/Currency/Currency'
+
+type Props = {}
+type CartData = {
+    totalPrice: number
 }
-const ShopPage = ({ cartData, addProductToCart }: Props) => {
+type CurrencyCoef = {
+    id?: number
+    coefficient: number
+    name: string
+}
+
+const ShopPage = (props: Props) => {
+    const [cartData, setCartData] = useState<CartData>({
+        totalPrice: 0,
+    })
+
+    const [currencyCoef, setCurrencyCoef] = useState<CurrencyCoef>({
+        coefficient: currencyObject[2].coefficient,
+        name: currencyObject[2].name,
+    })
+    const changeCurrency = (id: number) => {
+        setCurrencyCoef(currencyObject[id])
+    }
+    const addProductToCart = (price: number) => {
+        setCartData((prevState: CartData) => ({
+            totalPrice: prevState.totalPrice + price * currencyCoef.coefficient,
+        }))
+    }
+
     return (
         <>
             <Typography
@@ -19,8 +43,11 @@ const ShopPage = ({ cartData, addProductToCart }: Props) => {
             >
                 Our shop page
             </Typography>
-            <Currency />
-            <ProductsList addProductToCart={addProductToCart} />
+            <Currency changeCurrency={changeCurrency} />
+            <ProductsList
+                addProductToCart={addProductToCart}
+                currencyCoef={currencyCoef}
+            />
             <TotalPrice cartData={cartData} />
         </>
     )

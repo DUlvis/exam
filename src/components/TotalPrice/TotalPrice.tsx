@@ -7,7 +7,7 @@ type Props = {
 const TotalPrice = ({ cartData }: Props) => {
     return (
         <div>
-            <div>Total:{cartData.totalPrice}</div>
+            <div>Total:{Math.trunc(cartData.totalPrice)}</div>
         </div>
     )
 }

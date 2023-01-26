@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material'
 import productsArray from 'utils/productsArray'
 import ProductsListItem from './ProductsListItem'
+
 type ProductProps = {
     id: number
     title: string
@@ -11,9 +12,13 @@ type ProductProps = {
 
 type Props = {
     addProductToCart: (price: number) => void
+    currencyCoef: {
+        coefficient: number
+        name: string
+    }
 }
 
-const ProductsList = ({ addProductToCart }: Props) => {
+const ProductsList = ({ addProductToCart, currencyCoef }: Props) => {
     return (
         <>
             <Grid
@@ -24,7 +29,7 @@ const ProductsList = ({ addProductToCart }: Props) => {
                 spacing={4}
             >
                 {productsArray.map(
-                    ({ id, title, type, capacity, price }: ProductProps, i) => (
+                    ({ id, title, type, capacity, price }: ProductProps) => (
                         <Grid item xs={12} sm={6} md={4} key={id}>
                             <ProductsListItem
                                 title={title}
@@ -32,6 +37,7 @@ const ProductsList = ({ addProductToCart }: Props) => {
                                 capacity={capacity}
                                 price={price}
                                 addProductToCart={addProductToCart}
+                                currencyCoef={currencyCoef}
                             />
                         </Grid>
                     )

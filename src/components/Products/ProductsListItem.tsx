@@ -1,5 +1,4 @@
 import { Button, Card, CardActions, CardContent } from '@mui/material'
-import { currencyObject } from 'components/Currency/Currency'
 import './ProductsListItem.scss'
 
 type Props = {
@@ -8,6 +7,10 @@ type Props = {
     capacity: string
     price: number
     addProductToCart: (price: number) => void
+    currencyCoef: {
+        coefficient: number
+        name: string
+    }
 }
 const ProductsListItem = ({
     title,
@@ -15,6 +18,7 @@ const ProductsListItem = ({
     capacity,
     price,
     addProductToCart,
+    currencyCoef,
 }: Props) => {
     return (
         <Card className="product" variant="outlined">
@@ -28,8 +32,8 @@ const ProductsListItem = ({
                 </div>
                 <div className="product-price">
                     <span>Price:</span>{' '}
-                    {Math.trunc(price * currencyObject[3].coefficient)}
-                    {currencyObject[3].name}
+                    {Math.trunc(price * currencyCoef.coefficient)}
+                    {currencyCoef.name}
                 </div>
             </CardContent>
             <CardActions className="btns-wrap">
