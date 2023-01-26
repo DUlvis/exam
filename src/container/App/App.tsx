@@ -1,19 +1,16 @@
 import { Container } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
-import Counter from 'components/Counter/Counter'
+import ShopPage from 'pages/ShopPage/ShopPage'
 import './App.scss'
 
-const App = () => {
+type Props = {}
+
+const App = (props: Props) => {
     return (
         <>
             <CssBaseline />
             <Container>
-                <h1>COUNTER</h1>
-                <div>
-                    <Counter />
-                    <Counter />
-                    <Counter />
-                </div>
+                <ShopPage />
             </Container>
         </>
     )
