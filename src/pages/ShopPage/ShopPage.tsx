@@ -3,14 +3,13 @@ import Currency from 'components/Currency/Currency'
 import ProductsList from 'components/Products/ProductsList'
 import TotalPrice from 'components/TotalPrice/TotalPrice'
 import { useState } from 'react'
-import { currencyObject } from 'components/Currency/Currency'
+import { currencyArray } from 'components/Currency/Currency'
 
 type Props = {}
 type CartData = {
     totalPrice: number
 }
 type CurrencyCoef = {
-    id?: number
     coefficient: number
     name: string
 }
@@ -21,11 +20,14 @@ const ShopPage = (props: Props) => {
     })
 
     const [currencyCoef, setCurrencyCoef] = useState<CurrencyCoef>({
-        coefficient: currencyObject[2].coefficient,
-        name: currencyObject[2].name,
+        coefficient: currencyArray[0].coefficient,
+        name: currencyArray[0].name,
     })
-    const changeCurrency = (id: number) => {
-        setCurrencyCoef(currencyObject[id])
+    const changeCurrency = (id: number, totalPrice: number) => {
+        setCurrencyCoef(currencyArray[id - 1])
+        setCartData((prevState: CartData) => ({
+            totalPrice: prevState.totalPrice * currencyCoef.coefficient,
+        }))
     }
     const addProductToCart = (price: number) => {
         setCartData((prevState: CartData) => ({
@@ -43,7 +45,7 @@ const ShopPage = (props: Props) => {
             >
                 Our shop page
             </Typography>
-            <Currency changeCurrency={changeCurrency} />
+            <Currency changeCurrency={changeCurrency} cartData={cartData} />
             <ProductsList
                 addProductToCart={addProductToCart}
                 currencyCoef={currencyCoef}
