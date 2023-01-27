@@ -6,7 +6,7 @@ type Props = {
     type: string
     capacity: string
     price: number
-    addProductToCart: (price: number) => void
+    addProductToCart: () => void
     currencyCoef: {
         coefficient: number
         name: string
@@ -37,10 +37,7 @@ const ProductsListItem = ({
                 </div>
             </CardContent>
             <CardActions className="btns-wrap">
-                <Button
-                    variant="outlined"
-                    onClick={() => addProductToCart(superPrice)}
-                >
+                <Button variant="outlined" onClick={() => addProductToCart()}>
                     Buy
                 </Button>
             </CardActions>
