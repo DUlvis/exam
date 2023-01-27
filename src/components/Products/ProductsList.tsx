@@ -2,7 +2,7 @@ import { Grid } from '@mui/material'
 import productsArray from 'utils/productsArray'
 import ProductsListItem from './ProductsListItem'
 
-type ProductProps = {
+export type ProductProps = {
     id: number
     title: string
     type: string
@@ -11,7 +11,7 @@ type ProductProps = {
 }
 
 type Props = {
-    addProductToCart: (price: number) => void
+    addProductToCart: (product: ProductProps) => void
     currencyCoef: {
         coefficient: number
         name: string
@@ -36,7 +36,9 @@ const ProductsList = ({ addProductToCart, currencyCoef }: Props) => {
                                 type={type}
                                 capacity={capacity}
                                 price={price}
-                                addProductToCart={addProductToCart}
+                                addProductToCart={() => addProductToCart(
+                                  { id, title, type, capacity, price }
+                                )}
                                 currencyCoef={currencyCoef}
                             />
                         </Grid>
