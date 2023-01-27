@@ -20,6 +20,7 @@ const ProductsListItem = ({
     addProductToCart,
     currencyCoef,
 }: Props) => {
+    const superPrice = Math.trunc(price * currencyCoef.coefficient)
     return (
         <Card className="product" variant="outlined">
             <CardContent>
@@ -31,15 +32,14 @@ const ProductsListItem = ({
                     <span>Capacity:</span> {capacity}Gb
                 </div>
                 <div className="product-price">
-                    <span>Price:</span>{' '}
-                    {Math.trunc(price * currencyCoef.coefficient)}
+                    <span>Price:</span> {superPrice}
                     {currencyCoef.name}
                 </div>
             </CardContent>
             <CardActions className="btns-wrap">
                 <Button
                     variant="outlined"
-                    onClick={() => addProductToCart(price)}
+                    onClick={() => addProductToCart(superPrice)}
                 >
                     Buy
                 </Button>

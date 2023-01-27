@@ -24,14 +24,14 @@ const ShopPage = (props: Props) => {
         name: currencyArray[0].name,
     })
     const changeCurrency = (id: number, totalPrice: number) => {
-        setCurrencyCoef(currencyArray[id - 1])
+        setCurrencyCoef(() => currencyArray[id - 1])
         setCartData((prevState: CartData) => ({
             totalPrice: prevState.totalPrice * currencyCoef.coefficient,
         }))
     }
     const addProductToCart = (price: number) => {
         setCartData((prevState: CartData) => ({
-            totalPrice: prevState.totalPrice + price * currencyCoef.coefficient,
+            totalPrice: prevState.totalPrice + price,
         }))
     }
 
